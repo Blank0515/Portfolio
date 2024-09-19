@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <div id="header">
+            <div class="container">
+                <nav>
+                    <img src="images/logo.png" class="logo">
+                    <ul id="sidemenu">
+                        <li><a href="#header">Home</a></li>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#">Personal Details</a></li>
+                        <li><a href="#contact">Contact Me</a></li>
+                        <i class="fa-solid fa-x" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+                </nav>
+                <div class="header-text">
+                    <p>
+                        Hello, I'm <span style="color: blueviolet;">Arnab</span><br>Biswas
+                    </p>
+                    <h1>
+                        I'm a final-year Computer Science student passionate about software development and problem-solving. Explore my projects and skills as I work towards building impactful tech solutions!
+                    </h1>
+                </div>
+            </div>
+        </div>
+<!-- ----------------------about------------------- -->
+        <div id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="about-col-1">
+                        <img src="images/user.png">
+                    </div>
+                    <div class="about-col-2">
+                        <h1 class="sub-title">
+                            About Me
+                        </h1>
+                        <p>
+                            Hi, I'm Arnab Biswas a passionate and driven final-year Computer Science student with a strong focus on software development.
+                            I'm currently exploring opportunities in software development, where I can apply my knowledge in real-world projects and collaborate with innovative teams.
+                            I'm committed to mastering new technologies and translating that knowledge into innovative solutions. 
+                            Eager to contribute to cutting-edge projects and collaborate with like-minded professionals.
+                        </p>
+
+                        <div class="tab-titles">
+                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                            <p class="tab-links" onclick="opentab('education')">Education</p>
+                        </div>
+
+                        <div class="tab-contents active-tab" id="skills">
+                            <ul>
+                                <li><span>Languages</span><br>JAVA, Python</li>
+                                <li><span>Proficency</span><br>Data Structure and Algorithms</li>
+                                <li><span>Web Development</span><br>HTML, CSS</li>
+                                <li><span>Database</span><br>MySql</li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-contents" id="education">
+                            <ul>
+                                <li><span>B.Tech in Computer Science & Engineering</span><br>Budge Budge Institute of Technology <br>2021-2025 <br>CGPA:8.5</li>
+                                <li><span>12th Boards</span><br>Young Horizon's School <br>2020 <br>Percentage:85.5%</li>
+                                <li><span>10th Boards</span><br>Young Horizon's School <br>2018 <br>Percentage:93%</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- -------------------------------Projects--------------------- -->
+         <!-- -----------------------------------Contact ME-------------------- -->
+          <div id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="contact-left">
+                        <h1 class="sub-title">Contact Me</h1>
+                        <p><i class="fa-solid fa-paper-plane"></i>arnabbiswas.ab.0515@gmail.com</p>
+                        <p><i class="fa-solid fa-phone"></i>6295857925</p>
+                        <div class="social-icons">
+                            <a href=""><i class="fab fa-square-facebook"></i></a>
+                            <a href=""><i class="fab fa-square-x-twitter"></i></a>
+                            <a href=""><i class="fab fa-square-instagram"></i></a>
+                            <a href=""><i class="fab fa-linkedin"></i></a>
+                        </div>
+                        <a href="CV/ARNAB BISWAS.pdf" download class="btn btn2">Download CV</a>
+                    </div>
+                    <div class="contact-right">
+                        <form name="submit-to-google-sheet">
+                            <input type="text" name="Name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                            <button type="submit" class="btn btn2">Submit</button>
+                        </form>
+                        <span id="msg"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright"><!--  -->
+                <p>Copyright © Arnab Biswas</p>
+            </div>
+
+          </div>
+
+        <script>
+            var tablinks = document.getElementsByClassName("tab-links");
+            var tabcontents = document.getElementsByClassName("tab-contents");
+
+            function opentab(tabname){
+                for(tablink of tablinks){
+                    tablink.classList.remove("active-link");
+                }
+                for(tabcontent of tabcontents){
+                    tabcontent.classList.remove("active-tab");
+                }
+                event.currentTarget.classList.add("active-link");
+                document.getElementById(tabname).classList.add("active-tab");
+            }
+        </script>
+
+        <script src="https://kit.fontawesome.com/c77a064f1b.js" crossorigin="anonymous"></script>
+
+        <script>
+            var sidemenu = document.getElementById("sidemenu");
+            function openmenu(){
+                sidemenu.style.right = "0";
+            }
+            function closemenu(){
+                sidemenu.style.right = "-200px";
+            }
+        </script>
+
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzIz1w6cgc-DiNIJRHpRQyxdh7OAgjCOJUEQUmt4XQ2Lupwyz94q-qEOxjGIH5PZDEr/exec'
+            const form = document.forms['submit-to-google-sheet']
+            const msg = document.getElementById("msg")
+            form.addEventListener('submit', e => {
+                e.preventDefault()
+                fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    msg.innerHTML = "Message Sent Successfully"
+                    setTimeout(function(){
+                        msg.innerHTML = ""
+                    }, 5000)
+                    form.reset()
+                })
+                .catch(error => console.error('Error!', error.message))
+            })
+        </script>
+
+    </body>
+</html>
